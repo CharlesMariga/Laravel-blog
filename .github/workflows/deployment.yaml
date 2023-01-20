@@ -3,7 +3,8 @@ name: Deploy Workflow
 on:
   push: 
     branches:
-      - master
+      - main
+
 jobs:
   deployment:
     runs-on: ubuntu-latest
