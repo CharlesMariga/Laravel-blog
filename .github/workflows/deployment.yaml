@@ -37,6 +37,6 @@ jobs:
           key: ${{ secrets.OMG_SECRET }}
           port: 22
           script: | 
-            ls -al
             cd Laravel-blog
+            ls -al
             php vendor/bin/envoy run deploy
