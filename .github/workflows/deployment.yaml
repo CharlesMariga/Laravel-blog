@@ -36,6 +36,7 @@ jobs:
           username: deploy
           key: ${{ secrets.OMG_SECRET }}
           port: 22
+          proxy_key: ${{ secrets.OMG_SECRET }}
           script: |
             cd /var/www/html/youdomain.com
             composer require laravel/envoy
