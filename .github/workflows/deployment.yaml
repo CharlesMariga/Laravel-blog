@@ -12,22 +12,31 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v2
+      # - name: Cache composer dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: vendor
+      #     key: composer-${{ hashFiles('composer.lock') }}
+
+      # - name: Install composer dependencies
+      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+
+      # - name: Prepare Laravel Application
+      #   run: |
+      #     cp .env.example .env
+      #     php artisan key:generate
+
+      # - name: Prepare for deployment
+      #   run: composer require laravel/envoy
+
+      - name: SSH-Agent
+        id: ssh-agent
+        uses: appleboy/ssh-action@master
         with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
+          ssh-private-key: ${{ secrets.OMG_SECRET }}
+          start: true
+          env: SSH_AUTH_SOCK
 
-      - name: Install composer dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
-
-      - name: Prepare Laravel Application
-        run: |
-          cp .env.example .env
-          php artisan key:generate
-
-      - name: Prepare for deployment
-        run: composer require laravel/envoy
 
       - name: Deploy to test-server
         uses: appleboy/ssh-action@master
