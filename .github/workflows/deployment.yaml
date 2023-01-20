@@ -38,5 +38,4 @@ jobs:
           port: 22
           script: |
             cd /var/www/html/youdomain.com
-            ls -al
-            who am i
+            php vendor/bin/envoy run deploy
