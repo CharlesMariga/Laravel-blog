@@ -37,5 +37,6 @@ jobs:
           key: ${{ secrets.OMG_SECRET }}
           port: 22
           script: |
+            cd /var/www/html/youdomain.com
             ls -al
             who am i
