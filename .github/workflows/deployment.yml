@@ -1,0 +1,42 @@
+name: Deploy Workflow
+
+on:
+  push: 
+    branches:
+      - master
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Install composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run tests
+        run: php artisan test --parallel --stop-on-failure
+
+      - name: Prepare for deployment
+        run: composer require laravel/envoy
+
+      - name: Deploy to test-server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 157.245.40.234
+          username: deploy
+          key: ${{ secrets.OMG_SECRET }}
+          port: 22
+          script: | 
+            php vendor/bin/envoy run deploy
