@@ -19,7 +19,16 @@ jobs:
           port: 22
           proxy_key: ${{ secrets.OMG_SECRET }}
           script: |
+            php artisan down
             cd /var/www/html/youdomain.com
-            ls -al
+            git checkout main
+            git pull origin main
+            composer install --no-dev --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader
+            php artisan migrate --force
+            php artisan cache:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan up
+
             
             
