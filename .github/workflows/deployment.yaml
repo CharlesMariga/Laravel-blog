@@ -10,18 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup SSH key
+      - name: Deploy to test-server
         uses: appleboy/ssh-action@master
         with:
           host: 157.245.40.234
           username: deploy
           key: ${{ secrets.OMG_SECRET }}
           port: 22
-          ssh_private_key: ${{ secrets.OMG_SECRET }}
-          ssh_add: true
-      
-      - name: Change directories
-        run:  ls -al
+          proxy_key: ${{ secrets.OMG_SECRET }}
+          script: |
+            cd /var/www/html/youdomain.com
+            ls -al
+            
+            
