@@ -1,61 +1,64 @@
-# name: Deploy Workflow
-
-# on:
-#   push: 
-#     branches:
-#       - main
-
-# jobs:
-#   deployment:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v2
-
-#       - name: SSH-Agent
-#         id: ssh-agent
-#         uses: appleboy/ssh-action@master
-#         with:
-#           ssh-private-key: ${{ secrets.OMG_SECRET }}
-#           start: true
-#           env: SSH_AUTH_SOCK
-
-
-#       - name: Deploy to test-server
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: 157.245.40.234
-#           username: deploy
-#           key: ${{ secrets.OMG_SECRET }}
-#           port: 22
-#           proxy_key: ${{ secrets.OMG_SECRET }}
-#           script: |
-#             cd /var/www/html/youdomain.com
-#             composer require laravel/envoy
-#             php vendor/bin/envoy run deploy
-
-name: Deploy
+name: Deploy Workflow
 
 on:
-  push:
+  push: 
     branches:
       - main
 
 jobs:
-  deploy:
+  deployment:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.1
+      - name: SSH-Agent
+        id: ssh-agent
+        uses: appleboy/ssh-action@master
+        with:
+          ssh-private-key: ${{ secrets.OMG_SECRET }}
+          start: true
+          env: SSH_AUTH_SOCK
 
-    - name: Install dependencies
-      run: composer install --no-dev --optimize-autoloader
 
-    - name: Run Envoy command
-      run: php vendor/bin/envoy run deploy
+      - name: Deploy to test-server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 157.245.40.234
+          username: deploy
+          key: ${{ secrets.OMG_SECRET }}
+          port: 22
+          ssh_private_key: ${{ secrets.OMG_SECRET }}
+          script: |
+            cd /var/www/html/youdomain.com
+            composer require laravel/envoy
+            php vendor/bin/envoy run deploy
+
+
+# name: Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Setup SSH key
+#       uses: appleboy/ssh-action@master
+#       with:
+#         ssh_private_key: ${{ secrets.OMG_SECRET }}
+
+#     - name: Deploy code
+#       run: |
+#         git remote add production ssh://<username>@<hostname>/<path>
+#         git push production main
+
+#     - name: Copy ssh key
+#       run: ssh-copy-id <username>@<hostname>
