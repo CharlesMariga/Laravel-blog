@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Deploy to test-server
         uses: appleboy/ssh-action@master
         with:
@@ -20,6 +22,7 @@ jobs:
           ssh_private_key: ${{ secrets.OMG_SECRET }}
           ssh_add: true
           script: |
+            ssh_known_hosts  157.245.40.234 ${{ secrets.PUBLIC_KEY }}
             cd /var/www/html/youdomain.com
             composer require laravel/envoy
             php vendor/bin/envoy run deploy
