@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: SSH-Agent
-        id: ssh-agent
-        uses: appleboy/ssh-action@master
-        with:
-          ssh-private-key: ${{ secrets.OMG_SECRET }}
-          start: true
-          env: SSH_AUTH_SOCK
+      # - name: SSH-Agent
+      #   id: ssh-agent
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     ssh-private-key: ${{ secrets.OMG_SECRET }}
+      #     start: true
+      #     env: SSH_AUTH_SOCK
 
 
       - name: Deploy to test-server
@@ -28,7 +28,7 @@ jobs:
           username: deploy
           key: ${{ secrets.OMG_SECRET }}
           port: 22
-          key_path: "/home/deploy/.ssh"
+          ssh_private_key: ${{ secrets.OMG_SECRET }}
           script: |
             cd /var/www/html/youdomain.com
             composer require laravel/envoy
