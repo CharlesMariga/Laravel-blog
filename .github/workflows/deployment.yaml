@@ -28,7 +28,7 @@ jobs:
           username: deploy
           key: ${{ secrets.OMG_SECRET }}
           port: 22
-          ssh_private_key: ${{ secrets.OMG_SECRET }}
+          key_path: "/home/deploy/.ssh"
           script: |
             cd /var/www/html/youdomain.com
             composer require laravel/envoy
