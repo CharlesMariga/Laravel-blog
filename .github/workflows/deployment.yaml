@@ -23,8 +23,8 @@ jobs:
             cd /var/www/html/youdomain.com
             git checkout main
             git pull origin main
-            composer install --no-dev --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader
-            php artisan migrate --force
+            composer install
+            php artisan migrate
             php artisan cache:clear
             php artisan config:cache
             php artisan route:cache
