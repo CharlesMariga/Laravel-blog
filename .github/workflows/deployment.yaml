@@ -24,7 +24,4 @@ jobs:
           ssh_add: true
       
       - name: Change directories
-        run:  cd /var/www/html/youdomain.com
-
-      - name: Show the current folder
-        run: ls -al
+        run:  ls -al
