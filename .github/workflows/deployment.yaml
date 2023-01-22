@@ -1,52 +1,61 @@
-name: Deploy Workflow
+# name: Deploy Workflow
+
+# on:
+#   push: 
+#     branches:
+#       - main
+
+# jobs:
+#   deployment:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: SSH-Agent
+#         id: ssh-agent
+#         uses: appleboy/ssh-action@master
+#         with:
+#           ssh-private-key: ${{ secrets.OMG_SECRET }}
+#           start: true
+#           env: SSH_AUTH_SOCK
+
+
+#       - name: Deploy to test-server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: 157.245.40.234
+#           username: deploy
+#           key: ${{ secrets.OMG_SECRET }}
+#           port: 22
+#           proxy_key: ${{ secrets.OMG_SECRET }}
+#           script: |
+#             cd /var/www/html/youdomain.com
+#             composer require laravel/envoy
+#             php vendor/bin/envoy run deploy
+
+name: Deploy
 
 on:
-  push: 
+  push:
     branches:
       - main
 
 jobs:
-  deployment:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # - name: Cache composer dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: vendor
-      #     key: composer-${{ hashFiles('composer.lock') }}
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: 8.1
 
-      # - name: Install composer dependencies
-      #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+    - name: Install dependencies
+      run: composer install --no-dev --optimize-autoloader
 
-      # - name: Prepare Laravel Application
-      #   run: |
-      #     cp .env.example .env
-      #     php artisan key:generate
-
-      # - name: Prepare for deployment
-      #   run: composer require laravel/envoy
-
-      - name: SSH-Agent
-        id: ssh-agent
-        uses: appleboy/ssh-action@master
-        with:
-          ssh-private-key: ${{ secrets.OMG_SECRET }}
-          start: true
-          env: SSH_AUTH_SOCK
-
-
-      - name: Deploy to test-server
-        uses: appleboy/ssh-action@master
-        with:
-          host: 157.245.40.234
-          username: deploy
-          key: ${{ secrets.OMG_SECRET }}
-          port: 22
-          proxy_key: ${{ secrets.OMG_SECRET }}
-          script: |
-            cd /var/www/html/youdomain.com
-            composer require laravel/envoy
-            php vendor/bin/envoy run deploy
+    - name: Run Envoy command
+      run: php vendor/bin/envoy run deploy
