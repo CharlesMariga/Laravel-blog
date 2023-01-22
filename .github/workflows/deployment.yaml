@@ -17,7 +17,6 @@ jobs:
           username: deploy
           key: ${{ secrets.OMG_SECRET }}
           port: 22
-          proxy_key: ${{ secrets.OMG_SECRET }}
           script: |
             php artisan down
             cd /var/www/html/youdomain.com
