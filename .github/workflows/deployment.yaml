@@ -10,17 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      # - name: SSH-Agent
-      #   id: ssh-agent
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     ssh-private-key: ${{ secrets.OMG_SECRET }}
-      #     start: true
-      #     env: SSH_AUTH_SOCK
-
-
       - name: Deploy to test-server
         uses: appleboy/ssh-action@master
         with:
@@ -29,6 +18,7 @@ jobs:
           key: ${{ secrets.OMG_SECRET }}
           port: 22
           ssh_private_key: ${{ secrets.OMG_SECRET }}
+          ssh_add: true
           script: |
             cd /var/www/html/youdomain.com
             composer require laravel/envoy
