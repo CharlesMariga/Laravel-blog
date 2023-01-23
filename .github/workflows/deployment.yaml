@@ -21,9 +21,10 @@ jobs:
             php artisan down
             cd /var/www/html/youdomain.com
             git checkout main
+            git reset --hard
             git pull origin main
             composer install
-            php artisan migrate
+            php artisan migrate --force
             php artisan cache:clear
             php artisan config:cache
             php artisan route:cache
