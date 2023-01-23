@@ -24,6 +24,7 @@ jobs:
             git reset --hard
             git pull origin main
             composer install
+            php artisan down
             php artisan migrate --force
             php artisan cache:clear
             php artisan config:cache
