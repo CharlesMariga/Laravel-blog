@@ -12,38 +12,11 @@
 </head>
 
 <body>
+    <?php foreach ($posts as $post): ?>
     <article>
-        <h1><a href="/posts/my-first-post">My First Post</a></h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In esse, odio natus corrupti soluta quam alias ipsa
-            illum earum minima perspiciatis magnam explicabo eius, architecto, veniam animi quia labore consequuntur
-            vero fugit repellat aspernatur. Autem assumenda debitis, facere quod alias nihil. Dignissimos quod rem odio
-            necessitatibus accusamus maxime blanditiis doloribus rerum magnam quisquam, possimus eos unde aliquid.
-            Quibusdam quo nam laboriosam qui ut facilis reprehenderit aliquam quia facere. Quam a, in tenetur rem ipsam
-            animi voluptates illo exercitationem cum esse eveniet veniam at ex placeat? Asperiores culpa laboriosam aut
-            exercitationem, tempore voluptates, ab, corporis veniam error vel sapiente maxime autem.</p>
+        <?= $post ?>
     </article>
-
-    <article>
-        <h1><a href="/posts/my-second-post">My Second Post</a></h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In esse, odio natus corrupti soluta quam alias ipsa
-            illum earum minima perspiciatis magnam explicabo eius, architecto, veniam animi quia labore consequuntur
-            vero fugit repellat aspernatur. Autem assumenda debitis, facere quod alias nihil. Dignissimos quod rem odio
-            necessitatibus accusamus maxime blanditiis doloribus rerum magnam quisquam, possimus eos unde aliquid.
-            Quibusdam quo nam laboriosam qui ut facilis reprehenderit aliquam quia facere. Quam a, in tenetur rem ipsam
-            animi voluptates illo exercitationem cum esse eveniet veniam at ex placeat? Asperiores culpa laboriosam aut
-            exercitationem, tempore voluptates, ab, corporis veniam error vel sapiente maxime autem.</p>
-    </article>
-
-    <article>
-        <h1><a href="/posts/my-third-post">My Third Post</a></h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In esse, odio natus corrupti soluta quam alias ipsa
-            illum earum minima perspiciatis magnam explicabo eius, architecto, veniam animi quia labore consequuntur
-            vero fugit repellat aspernatur. Autem assumenda debitis, facere quod alias nihil. Dignissimos quod rem odio
-            necessitatibus accusamus maxime blanditiis doloribus rerum magnam quisquam, possimus eos unde aliquid.
-            Quibusdam quo nam laboriosam qui ut facilis reprehenderit aliquam quia facere. Quam a, in tenetur rem ipsam
-            animi voluptates illo exercitationem cum esse eveniet veniam at ex placeat? Asperiores culpa laboriosam aut
-            exercitationem, tempore voluptates, ab, corporis veniam error vel sapiente maxime autem.</p>
-    </article>
+    <?php endforeach; ?>
 </body>
 
 </html>
