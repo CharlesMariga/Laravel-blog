@@ -32,7 +32,7 @@ Route::get('posts/{post:slug}', function (Post $post) {
 });
 
 
-Route::get('category/{category}', function (Category $category) {
+Route::get('category/{category:slug}', function (Category $category) {
     return view('posts', [
         'posts' => $category->posts
     ]);
