@@ -1,4 +1,4 @@
-<x-layout>
+{{-- <x-layout>
     <article>
         <h1>{{ $post->title }}</h1>
 
@@ -13,4 +13,4 @@
     </article>
 
     <a href="/">&larr;Go Back</a>
-</x-layout>
+</x-layout> --}}
