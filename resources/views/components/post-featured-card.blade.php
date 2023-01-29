@@ -19,7 +19,7 @@
 
                    <div class="mt-4">
                        <h1 class="text-3xl">
-                           <a href="/posts/{{ $post->slug }}">
+                           <a href="posts/{{ $post->slug }}">
                                {{ $post->title }}
                            </a>
                        </h1>
@@ -38,7 +38,7 @@
                    <div class="flex items-center text-sm">
                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
                        <div class="ml-3">
-                           <h5 class="font-bold">{{ $post->author->name }}</h5>
+                           <a href="/?authors={{ $post->author->username }}">{{ $post->author->name }}</a>
                        </div>
                    </div>
 
