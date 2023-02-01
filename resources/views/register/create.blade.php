@@ -25,7 +25,7 @@
                     @enderror
                 </div>
                 <div class="mb-6">
-                    <label for="email" class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
                         Email
                     </label>
                     <input type="text" class="border border-gray-400 p-2 w-full" name="email" id="email"
